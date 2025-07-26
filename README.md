@@ -1,1 +1,1 @@
-# social-media-network
+# Group 1 - Assignment #6
