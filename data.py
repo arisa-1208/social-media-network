@@ -1,3 +1,4 @@
+# Author: Arisa Nakai
 from datetime import datetime
 
 # --- Comment Class ---
@@ -5,11 +6,10 @@ from datetime import datetime
 class Comment:
     def __init__(self, comment_id, author_username, content, timestamp=None):
         self.id = comment_id  # Unique ID for each comment so we can tell them apart
-        self.author_username = author_username  # The @username of the person who made the comment
+        self.author_username = author_username  # The username of the person who made the comment
         self.content = content  # The actual comment text
         self.timestamp = timestamp if timestamp is not None else datetime.now()  # If no time is passed in, just use now
-
-        self.author = None  # Later we’ll link this to the actual User object (makes it easier to access their info)
+        self.author = None  # This will later link to the actual User object who made the comment
 
 # --- Post Class ---
 # Represents one post someone makes. Can have comments and track who viewed it.
@@ -49,18 +49,18 @@ class User:
         self.viewed_posts = []  # Posts they’ve looked at
         self.comments_authored = []  # Comments they’ve written
 
-    # Connect this user to another one — like sending a friend request.
+    # Connect this user to another one — like sending a friend request
     def connect_user(self, target_username, relationship_type):
         self.connections.append((relationship_type, target_username))
 
-    # Let this user make a new post.
+    # Let this user make a new post
     def make_post(self, post_id, content, timestamp=None):
         new_post = Post(post_id=post_id, author_username=self.username, content=content, timestamp=timestamp)
         new_post.author = self  # Link the post back to the person who made it
         self.posts.append(new_post)  # Add it to their list of posts
         return new_post  # Return it in case we want to use it right away
 
-    # Simulate this user looking at a post (like scrolling past it or clicking it).
+    # Simulate this user looking at a post (like scrolling past it or clicking it)
     def view_a_post(self, post_obj, timestamp=None):
         self.viewed_posts.append(post_obj)  # Track it in the user's profile
         post_obj.add_view(self.username, timestamp)  # And also mark the view on the post side

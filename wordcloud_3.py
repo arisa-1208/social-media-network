@@ -1,4 +1,5 @@
-# wordcloud.py
+# Author: Arisa Nakai
+# wordcloud.py 
 from data import User
 
 # Standard libraries
